@@ -4,11 +4,13 @@ import { authRoutes } from './modules/auth/auth.route';
 import { issueRoutes } from './modules/issues/issues.route';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';
+import { requestLogger } from './middleware/logger';
 
 const app: Application = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);
 
 // Routes
 app.use('/api/auth', authRoutes);
