@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import { config } from '../config/env';
 
-// Database connection pool
+// Database connection
 // This pool is specifically configured to work with NeonDB / PostgreSQL
 const pool = new Pool({
   connectionString: config.database_url,
