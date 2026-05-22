@@ -22,7 +22,7 @@ const startServer = async () => {
       console.log(`Server is running on port ${config.port}`);
     });
 
-    // Graceful shutdown handling
+
     process.on('SIGTERM', () => {
       console.log('SIGTERM signal received: closing HTTP server');
       server.close(() => {
