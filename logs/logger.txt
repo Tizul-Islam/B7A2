@@ -6,3 +6,57 @@ Method -> POST - Time -> 1779373510811 - URL -> /api/auth/login
 
 Method -> POST - Time -> 1779373579939 - URL -> /api/issues
 
+Method -> GET - Time -> 1779376925572 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779376933219 - URL -> /api/auth/
+
+Method -> GET - Time -> 1779376936375 - URL -> /api/auth
+
+Method -> GET - Time -> 1779376954972 - URL -> /api/issues%0AAuthorization:%20Bearer%20%7Btoken%7D%0A%7B%0A%20%20%22title%22:%20%22Login%20button%20not%20working%20on%20mobile%22,%0A%20%20%22description%22:%20%22The%20login%20button%20is%20unresponsive%20on%20mobile%20devices.%20Users%20cannot%20login%20from%20their%20phones.%22,%0A%20%20%22type%22:%20%22bug%22%0A%7D
+
+Method -> POST - Time -> 1779467721752 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1779467766932 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1779467837726 - URL -> /api/issues
+
+Method -> GET - Time -> 1779467852386 - URL -> /
+
+Method -> GET - Time -> 1779467853121 - URL -> /favicon.ico
+
+Method -> GET - Time -> 1779467865065 - URL -> /api/issues
+
+Method -> GET - Time -> 1779467879449 - URL -> /api/auth
+
+Method -> GET - Time -> 1779467894707 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1779467898746 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1779467899503 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1779467910633 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779467913633 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779467914306 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779467914833 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779467936633 - URL -> /api/auth/
+
+Method -> GET - Time -> 1779467941702 - URL -> /api/auth
+
+Method -> POST - Time -> 1779467955141 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1779467963654 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1779467973252 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779467986437 - URL -> /api/issues
+
+Method -> GET - Time -> 1779468004017 - URL -> /api/auth/signup
+
+Method -> GET - Time -> 1779469546027 - URL -> /api/auth/issues
+
+Method -> GET - Time -> 1779469562855 - URL -> /api/issues
+
