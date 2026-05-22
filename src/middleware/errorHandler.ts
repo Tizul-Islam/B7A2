@@ -7,7 +7,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
   const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
   const message = err.message || 'Internal Server Error';
 
-  if (err.code === '23505') { // PostgreSQL unique violation error code
+  if (err.code === '23505') {
     const statusCode = StatusCodes.CONFLICT;
     const message = 'Duplicate field value entered';
   }

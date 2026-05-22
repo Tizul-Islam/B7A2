@@ -4,7 +4,7 @@ import pool from './db';
 
 const startServer = async () => {
   try {
-    // Check DB connection (optional in development)
+
     try {
       const client = await pool.connect();
       console.log('Successfully connected to the PostgreSQL database (NeonDB compatible)');
@@ -14,7 +14,7 @@ const startServer = async () => {
         console.warn('⚠️  Database connection failed in development mode. Starting server anyway.');
         console.warn('   Make sure PostgreSQL is running on port 5432 or update DATABASE_URL in .env');
       } else {
-        throw dbError; // In production, fail if DB can't connect
+        throw dbError;
       }
     }
 

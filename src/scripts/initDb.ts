@@ -25,16 +25,16 @@ const initDb = async () => {
       );
     `);
 
-    // Drop and re-add constraint to allow only contributor/maintainer roles
+
     try {
       await pool.query(`ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check`);
     } catch (e) {
-      // Ignore
+
     }
     try {
       await pool.query(`ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('contributor', 'maintainer'))`);
     } catch (e) {
-      // Ignore
+
     }
 
     await pool.query(`

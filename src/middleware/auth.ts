@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '../utils/jwt';
 import { sendErrorResponse } from '../utils/response';
 
-// Extend Express Request object to include user
+
 declare global {
   namespace Express {
     interface Request {
