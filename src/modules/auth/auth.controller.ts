@@ -24,5 +24,8 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   const result = await loginService(req.body);
 
   // 3. Send response
-  sendSuccessResponse(res, StatusCodes.OK, 'Login successful', result);
+  sendSuccessResponse(res, StatusCodes.OK, 'Login successful', {
+    token: result.token,
+    user: result.user,
+  });
 });

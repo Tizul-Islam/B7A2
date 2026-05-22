@@ -4,6 +4,15 @@ const initDb = async () => {
   try {
     console.log('Initializing database schema...');
 
+    // Drop profiles table and extra columns to clean up database
+    await pool.query(`DROP TABLE IF EXISTS profiles CASCADE;`);
+    try {
+      await pool.query(`ALTER TABLE users DROP COLUMN IF EXISTS is_active;`);
+      await pool.query(`ALTER TABLE users DROP COLUMN IF EXISTS age;`);
+    } catch (e) {
+      // Ignore
+    }
+
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -15,6 +24,18 @@ const initDb = async () => {
         updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
     `);
+
+    // Drop and re-add constraint to allow only contributor/maintainer roles
+    try {
+      await pool.query(`ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check`);
+    } catch (e) {
+      // Ignore
+    }
+    try {
+      await pool.query(`ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('contributor', 'maintainer'))`);
+    } catch (e) {
+      // Ignore
+    }
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS issues (
