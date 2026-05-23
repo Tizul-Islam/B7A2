@@ -8,7 +8,7 @@ This application is built with a strict **3-Layer Architecture** (Routes -> Cont
 
 ## Live API
 
-🔗 **Live Deployment URL:** [https://devpulse-liart.vercel.app](https://devpulse-liart.vercel.app)
+🔗 **Live Deployment URL:** [https://devpulse-liart.vercel.app/](https://devpulse-liart.vercel.app/)
 
 ---
 
