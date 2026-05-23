@@ -8,7 +8,7 @@ This application is built with a strict **3-Layer Architecture** (Routes -> Cont
 
 ## Live API
 
-🔗 **Live Deployment URL:** [https://devpulse-api.onrender.com](https://devpulse-api.onrender.com)
+🔗 **Live Deployment URL:** [https://devpulse-liart.vercel.app](https://devpulse-liart.vercel.app)
 
 ---
 
@@ -38,7 +38,7 @@ Follow these steps to set up the project locally on your machine:
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Tizul-Islam/B7A2.git
 cd B7A2
 ```
 
