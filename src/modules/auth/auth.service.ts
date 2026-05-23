@@ -48,11 +48,15 @@ export const loginService = async (credentials: any): Promise<AuthResponse> => {
 
   const accessToken = generateToken(tokenPayload);
 
-  // Exclude password from the response
-  const { password: _, ...userWithoutPassword } = user;
+  const userResponse = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
 
   return {
     token: accessToken,
-    user: userWithoutPassword,
+    user: userResponse,
   };
 };

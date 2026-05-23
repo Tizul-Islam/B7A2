@@ -4,7 +4,7 @@ const initDb = async () => {
   try {
     console.log('Initializing database schema...');
 
-    // Drop profiles table and extra columns to clean up database
+
     await pool.query(`DROP TABLE IF EXISTS profiles CASCADE;`);
     try {
       await pool.query(`ALTER TABLE users DROP COLUMN IF EXISTS is_active;`);
@@ -44,7 +44,7 @@ const initDb = async () => {
         description TEXT NOT NULL,
         type VARCHAR(50) NOT NULL CHECK (type IN ('bug', 'feature_request')),
         status VARCHAR(50) NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'in_progress', 'resolved')),
-        reporter_id INTEGER NOT NULL,
+        reporter_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );

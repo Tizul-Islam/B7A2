@@ -19,69 +19,74 @@ export const createIssueService = async (data: any, reporterId: number): Promise
 export const getIssuesService = async (queryFilters: any): Promise<IssueWithReporter[]> => {
   const { sort = 'newest', type, status } = queryFilters;
 
-  let queryText = 'SELECT * FROM issues WHERE 1=1';
+  let queryText = `
+    SELECT 
+      i.id, 
+      i.title, 
+      i.description, 
+      i.type, 
+      i.status, 
+      i.created_at, 
+      i.updated_at,
+      CASE 
+        WHEN u.id IS NULL THEN NULL 
+        ELSE json_build_object('id', u.id, 'name', u.name, 'role', u.role) 
+      END AS reporter
+    FROM issues i
+    LEFT JOIN users u ON i.reporter_id = u.id
+    WHERE 1=1
+  `;
   const queryParams: any[] = [];
   let paramCount = 1;
 
   if (type) {
-    queryText += ` AND type = $${paramCount}`;
+    queryText += ` AND i.type = $${paramCount}`;
     queryParams.push(type);
     paramCount++;
   }
 
   if (status) {
-    queryText += ` AND status = $${paramCount}`;
+    queryText += ` AND i.status = $${paramCount}`;
     queryParams.push(status);
     paramCount++;
   }
 
   if (sort === 'oldest') {
-    queryText += ' ORDER BY created_at ASC';
+    queryText += ' ORDER BY i.created_at ASC';
   } else {
-    queryText += ' ORDER BY created_at DESC';
+    queryText += ' ORDER BY i.created_at DESC';
   }
 
   const issuesResult = await pool.query(queryText, queryParams);
-  const issues = issuesResult.rows;
-
-  if (issues.length === 0) {
-    return [];
-  }
-
-  const reporterIds = [...new Set(issues.map(issue => issue.reporter_id))];
-  const reportersQuery = `SELECT id, name, role FROM users WHERE id = ANY($1)`;
-  const reportersResult = await pool.query(reportersQuery, [reporterIds]);
-  
-  const reporterMap = reportersResult.rows.reduce((acc, reporter) => {
-    acc[reporter.id] = reporter;
-    return acc;
-  }, {} as Record<number, any>);
-
-  return issues.map(issue => {
-    const { reporter_id, ...issueData } = issue;
-    return {
-      ...issueData,
-      reporter: reporterMap[reporter_id] || null
-    };
-  });
+  return issuesResult.rows;
 };
 
 export const getIssueByIdService = async (id: string): Promise<IssueWithReporter> => {
-  const issueResult = await pool.query('SELECT * FROM issues WHERE id = $1', [id]);
-  const issue = issueResult.rows[0];
+  const queryText = `
+    SELECT 
+      i.id, 
+      i.title, 
+      i.description, 
+      i.type, 
+      i.status, 
+      i.created_at, 
+      i.updated_at,
+      CASE 
+        WHEN u.id IS NULL THEN NULL 
+        ELSE json_build_object('id', u.id, 'name', u.name, 'role', u.role) 
+      END AS reporter
+    FROM issues i
+    LEFT JOIN users u ON i.reporter_id = u.id
+    WHERE i.id = $1
+  `;
+  const result = await pool.query(queryText, [id]);
+  const issue = result.rows[0];
 
   if (!issue) {
     throw new AppError(StatusCodes.NOT_FOUND, 'Issue not found');
   }
 
-  const reporterResult = await pool.query('SELECT id, name, role FROM users WHERE id = $1', [issue.reporter_id]);
-  const reporter = reporterResult.rows[0];
-
-  const { reporter_id, ...issueData } = issue;
-  return {
-    ...issueData,
-    reporter: reporter || null
-  };
+  return issue;
 };
 
 export const updateIssueService = async (id: string, updateData: any, userId: number, userRole: string): Promise<Issue> => {

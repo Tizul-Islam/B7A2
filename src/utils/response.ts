@@ -6,11 +6,15 @@ export const sendSuccessResponse = (
   message: string,
   data?: any
 ) => {
-  return res.status(statusCode).json({
+  const responseBody: any = {
     success: true,
+    statusCode,
     message,
-    data,
-  });
+  };
+  if (data !== undefined) {
+    responseBody.data = data;
+  }
+  return res.status(statusCode).json(responseBody);
 };
 
 export const sendErrorResponse = (
@@ -19,9 +23,13 @@ export const sendErrorResponse = (
   message: string,
   errors?: any
 ) => {
-  return res.status(statusCode).json({
+  const responseBody: any = {
     success: false,
+    statusCode,
     message,
-    errors,
-  });
+  };
+  if (errors !== undefined && errors !== null) {
+    responseBody.errors = errors;
+  }
+  return res.status(statusCode).json(responseBody);
 };

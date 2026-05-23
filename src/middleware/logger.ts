@@ -27,7 +27,7 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction): 
     // 1. Double check /
     ensureLogsDirExists();
 
-    // 2. Extract request details
+    // 2.  request details
     const method = req.method;
     const time = Date.now();
     const url = req.originalUrl || req.url;
